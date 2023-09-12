@@ -22,7 +22,7 @@ function Login() {
     }, [login]);
     function Autenticar(evento){ //essa função verifica as informações colocadas no campo, e verifica se o dados existem no servidor
         evento.preventDefault();
-        fetch("http://10.139.75.32:8080/login",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "login",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'

@@ -14,7 +14,7 @@ function Cadastro() {
 
     function Cadastrar( e ){
         e.preventDefault();
-        fetch("http://10.139.75.32:8080/users",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "users",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'

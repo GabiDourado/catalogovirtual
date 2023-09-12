@@ -13,7 +13,7 @@ function Filme() {
     const [ erro, setErro ] = useState(false);
     function Enviar(e){
         e.preventDefault();
-        fetch("http://10.139.75.32:8080/filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ function Filme() {
         })
         .then( (resposta) => resposta.json()) //se a autenticação funcionar, transforma a resposta em json
         .then( (json) => {
-            if(json.titulo && json.ano){ //se a resposta for transformada em json, vem a esse passo
+            if(json._id){ //se a resposta for transformada em json, vem a esse passo
                 setAdiciona(true); //se a resposta for 401, que representa um erro, a variável do erro se torna verdadeira e aciona os acontecimentos que indicam ao usuário qua algo está errado
                 setErro(false);
             }
