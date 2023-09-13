@@ -1,12 +1,13 @@
-import { Avatar, Button, Container } from "@mui/material";
+import { Avatar, Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import Filme from "./components/filme"
+import "./global.css"
+import Menu from "./components/Menu";
 
 function App(props) {
   const [filmes, setFilmes] = useState();
   const [erro, setErro] = useState();
   useEffect(()=>{
-    fetch(process.env.REACT_APP_BACKEND + "filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+    fetch(process.env.REACT_APP_BACKEND + "produto",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
       method:"GET",
       headers:{
           'Content-Type': 'application/json'
@@ -18,7 +19,7 @@ function App(props) {
   },[])
   function Excluir(evento, id){ //essa função verifica as informações colocadas no campo, e verifica se o dados existem no servidor
     evento.preventDefault();
-    fetch(process.env.REACT_APP_BACKEND + "filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+    fetch(process.env.REACT_APP_BACKEND + "produto",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
         method:"DELETE",
         headers:{
             'Content-Type': 'application/json'
@@ -38,8 +39,15 @@ function App(props) {
 }
   return (
     <>
-      <h1>Filmes</h1>
-      <Container sx={{
+      <Menu/>
+      <h1 style={{textAlign: "center", fontSize: "2rem"}}>Jogos</h1>
+      
+    </>
+  );
+}
+
+export default App;
+/*<Container sx={{
         display:"flex",
         flexFlow:"row",
         flexWrap:"wrap",
@@ -60,9 +68,4 @@ function App(props) {
             />
           ))
         )}
-      </Container>
-    </>
-  );
-}
-
-export default App;
+      </Container>*/

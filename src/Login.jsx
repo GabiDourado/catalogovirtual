@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 
+
 function Login() {
   //cria constantes para o uso do usestate, para ser possível alterar o valor e ultilizar a primeira variante para exibi-la
     const [ email, setEmail ] = useState("");
