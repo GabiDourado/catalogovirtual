@@ -16,6 +16,26 @@ function App(props) {
   .then( (json) => {setFilmes (json)})
   .catch( (erro) => {setErro(true)})
   },[])
+  function Excluir(evento, id){ //essa função verifica as informações colocadas no campo, e verifica se o dados existem no servidor
+    evento.preventDefault();
+    fetch(process.env.REACT_APP_BACKEND + "filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        method:"DELETE",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {
+               id:id
+            }
+        )
+    })
+    .then( (resposta) => resposta.json()) //se a autenticação funcionar, transforma a resposta em json
+    .then( (json) => {
+      const novalista = filmes.filter((filmes) => filmes._id !== id );
+      setFilmes(novalista);
+    })
+    .catch( (erro) => {setErro(true)}) //se algo não funcionar, indica um erro ao usuário
+}
   return (
     <>
       <h1>Filmes</h1>
@@ -23,8 +43,7 @@ function App(props) {
         display:"flex",
         flexFlow:"row",
         flexWrap:"wrap",
-        gap: "1.5rem",
-        alignItems: "center",
+        gap: "1rem",
         justifyContent:"center"
       }}>
         {filmes && (
@@ -36,14 +55,12 @@ function App(props) {
               duracao={filme.duracao}
               categoria={filme.categoria}
               descricao={filme.descricao}
+              excluir={ ( e ) => Excluir( e, filme._id ) }
+              id= {filme._id}
             />
           ))
         )}
       </Container>
-      <Button variant="outlined" color="secondary">Outlined</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="text" color="secondary">Text</Button>
-      <Avatar alt="Gabi" src="/static/images/avatar/3.jpg" />
     </>
   );
 }
