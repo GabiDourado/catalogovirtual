@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography } from '@mui/material'
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
@@ -47,12 +47,13 @@ function Login() {
         .catch( (erro) => {setErro(true)}) //se algo não funcionar, indica um erro ao usuário
     }
   return (
-      <Container component="section" maxWidth="xs">
+      <Container component="section" maxWidth="xs" >
           <Box 
           sx={{
-              mt:15,
+              mt: 15,
+              mb: 15,
               backgroundColor:"#a172d8",
-              padding: "50px",
+              padding: "45px",
               borderRadius:"10px",
               display:"flex",
               flexDirection:"column",
@@ -91,11 +92,32 @@ function Login() {
                     fullWidth sx={{mt:1, mb:1}}>Enviar</Button>
                   <Grid container>
                       <Grid item xs>
-                          Esqueci a senha
+                          <Link  href="/trocarsenha/:id"
+                          sx={{
+                      textDecoration:"none",
+                      color:"black",
+                      fontSize: "1.2rem"
+                    }}>Esqueci a senha</Link>
                       </Grid>
                       <Grid item>
-                          Cadastrar-se
+                          <Link href="/cadastro"
+                          sx={{
+                            textDecoration:"none",
+                            color:"black",
+                            fontSize: "1.2rem"
+                          }}>Cadastrar-se</Link>
                       </Grid>
+                  </Grid>
+                  <Grid xs={5} sx={{
+                    textAlign:"center",
+                    mt: 1,
+                    mb: 0
+                  }}>
+                    <Link href="/" sx={{
+                      textDecoration:"none",
+                      color:"black",
+                      fontSize: "1.2rem"
+                    }}>Voltar a página inicial</Link>
                   </Grid>
               </Box>
           </Box>

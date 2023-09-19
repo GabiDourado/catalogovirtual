@@ -1,4 +1,4 @@
-import { Box, Button, Container, Checkbox, FormControlLabel, TextField, Typography, Alert } from '@mui/material'
+import { Box, Button, Container, Checkbox, FormControlLabel, TextField, Typography, Alert, Grid, Link } from '@mui/material'
 import { useState, useEffect } from 'react';
 import React from 'react'
 
@@ -51,10 +51,11 @@ function Cadastro() {
         //setCadastro(false);
     },[cadastro]);
   return (
-    <Container component="section" maxWidth="xs">
+    <Container component="section" maxWidth="sm">
         <Box 
         sx={{
-            mt:15,
+            mt: 3,
+            mb: 3,
             backgroundColor:"#a172d8",
             padding: "50px",
             borderRadius:"10px",
@@ -76,6 +77,7 @@ function Cadastro() {
                     fullWidth
                     value={nome}
                     onChange={(e) => setNome( e.target.value )}
+                    required
                 />
                 <TextField
                     type="email" 
@@ -85,6 +87,7 @@ function Cadastro() {
                     fullWidth
                     value={email}
                     onChange={(e) => setEmail( e.target.value )}
+                    required
                 />
                 <TextField
                     type="tel" 
@@ -94,6 +97,7 @@ function Cadastro() {
                     fullWidth
                     value={telefone}
                     onChange={(e) => setTel( e.target.value )}
+                    required
                 />
                 <TextField
                     type="text" 
@@ -103,6 +107,7 @@ function Cadastro() {
                     fullWidth
                     value={cpf}
                     onChange={(e) => setCpf( e.target.value )}
+                    required
                 />
                 <TextField 
                     type="password" 
@@ -112,6 +117,7 @@ function Cadastro() {
                     fullWidth
                     value={senha}
                     onChange={(e) => setSenha( e.target.value )}
+                    required
                 />
                 <FormControlLabel
                     control={<Checkbox value={concordo} name='concordo' onChange={(e) => setConcordo(!concordo)}/>}
@@ -121,6 +127,19 @@ function Cadastro() {
                     type='submit'
                     variant="contained"  
                     fullWidth sx={{mt:1, mb:1}}>Cadastrar</Button>
+                <Grid xs={5} sx={{
+                        textAlign:"center",
+                        mt: 1,
+                        mb: 0,
+                    }}>
+                        <Link  sx={{
+                        
+                        fontSize: "1.3rem",
+                        }}><Button variant="outlined" href="/login" sx={{
+                            textDecoration:"none",
+                            color:"black",
+                        }}> Voltar</Button></Link>
+                  </Grid>
             </Box>
         </Box>
     </Container>

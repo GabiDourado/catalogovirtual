@@ -1,7 +1,9 @@
 import { Avatar, Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import Produto from "./pages/components/Produto"
 import "./global.css"
-import Menu from "./components/Menu";
+
+import MenuTeste from "./pages/components/MenuTeste";
 
 function App(props) {
   const [filmes, setFilmes] = useState();
@@ -39,9 +41,31 @@ function App(props) {
 }
   return (
     <>
-      <Menu/>
-      <h1 style={{textAlign: "center", fontSize: "2rem"}}>Jogos</h1>
-      
+      <MenuTeste/>
+      <Container
+        sx={{
+          display:"flex",
+          flexFlow:"row",
+          flexWrap:"wrap",
+          gap: "1rem",
+          justifyContent:"center"
+        }}>
+           {filmes && (
+          filmes.map((filme,index) => (
+            <Produto
+              imagem={filme.imagem}
+              titulo={filme.titulo}
+              ano={filme.ano}
+              duracao={filme.duracao}
+              categoria={filme.categoria}
+              descricao={filme.descricao}
+              excluir={ ( e ) => Excluir( e, filme._id ) }
+              id= {filme._id}
+            />
+          ))
+        )}
+
+      </Container>
     </>
   );
 }

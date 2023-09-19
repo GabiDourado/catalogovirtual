@@ -13,7 +13,7 @@ function Menu( props) {
         <Grid item xs={10} sx={{
             display: "flex",
             justifyContent: "center",
-            marginLeft: "8rem"
+            marginLeft: "7rem"
         }}>
             <Button sx={{
                 borderRadius: "30px",

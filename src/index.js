@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client';
 import App from "./App";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Login from './Login';
-import Cadastro from './Cadastro';
-import Filme from './Produtos';
-import EditaFilme from './EditaProduto';
+import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
+import Jogo from './pages/Produtos';
+import EditaFilme from './pages/EditaProduto';
+import TrocarSenha from './pages/TrocarSenha';
+import Perfil from './pages/Perfil';
+import EditaPerfil from './pages/EditaPerfil';
 
 const theme = createTheme({
   palette: {
@@ -55,12 +58,24 @@ const router = createBrowserRouter([
     element: <Cadastro/>
   },
   {
-    path: "/produtos",
-    element: <Filme/>
+    path: "/novojogo",
+    element: <Jogo/>
   },
   {
     path:"/edicao/:id",
     element: <EditaFilme/>
+  },
+  {
+    path:"/trocarsenha/:id",
+    element: <TrocarSenha/>
+  },
+  {
+    path: "/perfil/:id",
+    element: <Perfil/>
+  }, 
+  {
+    path:"/editaperfil/:id",
+    element: <EditaPerfil/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
