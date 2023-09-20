@@ -7,14 +7,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 /* "_id": "650adff42a26e4e19b776104",*/
 function Perfil(props) {
-    const { id } = useParams();
     const [ email, setEmail ] = useState("");
-    const [ senha, setSenha ] = useState("");
     const [ telefone, setTel ] = useState("");
     const [ nome, setNome ] = useState("");
-    const [ cpf, setCpf ] = useState("");
-    const [ edita, setEdita ] = useState(false);
-    const [ erro, setErro ] = useState(false);
 
     useEffect(()=> {
       const usuario = localStorage.getItem("usuario");
