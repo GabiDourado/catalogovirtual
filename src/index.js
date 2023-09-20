@@ -70,7 +70,7 @@ const router = createBrowserRouter([
     element: <TrocarSenha/>
   },
   {
-    path: "/perfil/:id",
+    path: "/perfil",
     element: <Perfil/>
   }, 
   {

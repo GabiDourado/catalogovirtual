@@ -15,6 +15,25 @@ function Perfil(props) {
     const [ cpf, setCpf ] = useState("");
     const [ edita, setEdita ] = useState(false);
     const [ erro, setErro ] = useState(false);
+
+    useEffect(()=> {
+      const usuario = localStorage.getItem("usuario");
+      fetch(process.env.REACT_APP_BACKEND + "usuarios/" + usuario,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+      )
+      .then( (resposta) => resposta.json() )
+      .then( (json) => {
+        setEmail( json.email );
+        setNome( json.nome );
+        setTel( json.telefone);
+
+      })
+    },[])
   return (
     <>
       <MenuTeste/>
@@ -38,9 +57,9 @@ function Perfil(props) {
                     backgroundColor: "#A011E4"
                   }}
                 ></Avatar>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Nome</Typography>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Email</Typography>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Telefone</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{nome}</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{email}</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{telefone}</Typography>
               </Box>
           </Box>
           <Box sx={{display:"flex"}}>

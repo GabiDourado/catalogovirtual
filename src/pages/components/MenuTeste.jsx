@@ -153,7 +153,7 @@ function MenuTeste(props) {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Button sx={{ textDecoration: "none", color: "white", width:"100%" }} href={"/perfil/" + usuario}>Perfil</Button>
+                                <Button sx={{ textDecoration: "none", color: "white", width:"100%" }} href={"/perfil"}>Perfil</Button>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Button sx={{ textDecoration: "none", color: "white" , width:"100%"}} href="/login">Entrar</Button>

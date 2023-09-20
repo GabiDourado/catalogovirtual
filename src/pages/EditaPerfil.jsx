@@ -1,6 +1,7 @@
 import { Box, Button, Container, TextField, Typography, Alert, Grid } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 function EditaPerfil( props) {
     const [ email, setEmail ] = useState("");
@@ -8,14 +9,35 @@ function EditaPerfil( props) {
     const [ telefone, setTel ] = useState("");
     const [ nome, setNome ] = useState("");
     const [ cpf, setCpf ] = useState("");
-    const [ imagem, setImagen] = useState("");
-    const [ cadastro, setCadastro ] = useState(false);
+    const [ edita, setEdita ] = useState(false);
     const [ erro, setErro ] = useState(false);
+    const usuario = localStorage.getItem("usuario");
 
-    function Cadastrar( e ){
+    useEffect(( ) => {
+        fetch(process.env.REACT_APP_BACKEND + "usuarios/" + usuario ,{ 
+            method:"GET",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+        })
+        .then( (resposta) => resposta.json()) 
+        .then( (json) => {
+            if(!json.status){
+                setNome(json.nome);
+                setEmail(json.email);
+                setTel(json.telefone);
+                setCpf(json.cpf);
+            }
+            else{
+                setErro("Perfil não encontrado");
+            }
+        })
+        .catch( (erro) => {setErro(true)}) 
+    }, [] );
+    function EditcaoPerfil(e){
         e.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "users",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
-            method:"POST",
+        fetch(process.env.REACT_APP_BACKEND + "usuarios/",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+            method:"PUT",
             headers:{
                 'Content-Type': 'application/json'
             },
@@ -25,31 +47,23 @@ function EditaPerfil( props) {
                     email: email,
                     cpf: cpf,
                     telefone: telefone,
-                    senha: senha
+                    usuario: usuario
                 }
             )
         })
         .then( (resposta) => resposta.json()) //se a autenticação funcionar, transforma a resposta em json
         .then( (json) => {
-            if(json.cpf){ //se a resposta for transformada em json, vem a esse passo
-                setCadastro(true); //se a resposta for 401, que representa um erro, a variável do erro se torna verdadeira e aciona os acontecimentos que indicam ao usuário qua algo está errado
+            if(json._id){ //se a resposta for transformada em json, vem a esse passo
+                setEdita(true); //se a resposta for 401, que representa um erro, a variável do erro se torna verdadeira e aciona os acontecimentos que indicam ao usuário qua algo está errado
                 setErro(false);
             }
             else{
                 setErro(true); //se tudo estiver correto, ativa o login como verdadeiro e redireciona o usuário para a pagina inicial
-                setCadastro(false);
+                setEdita("Não foi possível editar o jogo");
             }
         })
-        .catch( (erro) => {setErro(true)}) //se algo não funcionar, indica um erro ao usuário
+        .catch( (erro) => {setErro("Erro ao processar sua requisição")})
     }
-    useEffect( () => {
-        setNome("");
-        setEmail("");
-        setCpf("");
-        setTel("");
-        setSenha("");
-        //setCadastro(false);
-    },[cadastro]);
   return (
     <Container component="section" maxWidth="sm">
         <Box sx={{
@@ -65,8 +79,8 @@ function EditaPerfil( props) {
                 component="h1" 
                 variant="h4">Edite seu Perfil:</Typography>
                 {erro && (<Alert severity="warning" variant="outlined">{erro}</Alert>)}
-                {cadastro && (<Alert severity="success" variant="outlined">Perfil editado com sucesso!</Alert>)}
-            <Box component="form" onSubmit={Cadastrar}>
+                {edita && (<Alert severity="success" variant="outlined">Perfil editado com sucesso!</Alert>)}
+            <Box component="form" onSubmit={EditcaoPerfil}>
             <TextField
                     type="text" 
                     label="Nome" 
@@ -107,24 +121,6 @@ function EditaPerfil( props) {
                     onChange={(e) => setCpf( e.target.value )}
                     required
                 />
-                <TextField 
-                    type="password" 
-                    label="Senha" 
-                    variant="filled" 
-                    margin="normal" 
-                    fullWidth
-                    value={senha}
-                    onChange={(e) => setSenha( e.target.value )}
-                    required
-                />
-                <Box component="figure" sx={{
-                    margin: "0 auto",
-                    display: 'flex',
-                    justifyContent: "center",
-                    width: "300px"
-                }}>
-                    <img src={imagem} alt={nome} style={{ width: "100%" }} />
-                </Box>
                 <Button
                     type='submit'
                     variant="contained"  
@@ -134,7 +130,7 @@ function EditaPerfil( props) {
                         mt: 1,
                         mb: 0,
                     }}>
-                        <Button variant="outlined" href="/perfil/:id" sx={{
+                        <Button variant="outlined" href="/perfil" sx={{
                             textDecoration:"none",
                             color:"black",
                         }}> Voltar</Button>

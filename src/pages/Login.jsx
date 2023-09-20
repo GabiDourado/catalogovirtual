@@ -37,7 +37,7 @@ function Login() {
         .then( (resposta) => resposta.json()) //se a autenticação funcionar, transforma a resposta em json
         .then( (json) => {
             if(json.user){ //se a resposta for transformada em json, vem a esse passo
-              localStorage.setItem( "usuario" , JSON.stringify(json.user._id));
+              localStorage.setItem( "usuario" , json.user._id);
               setLogin(true); //se tudo estiver correto, ativa o login como verdadeiro e redireciona o usuário para a pagina inicial  
             }
             else{
