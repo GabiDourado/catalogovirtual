@@ -2,13 +2,11 @@ import { AppBar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Typography
 import React from 'react'
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
-import { useParams } from 'react-router-dom';
 
 function MenuTeste(props) {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const usuario = localStorage.getItem("usuario");
-    const { id } = useParams();
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);

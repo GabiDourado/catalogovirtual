@@ -4,7 +4,6 @@ import { Avatar, Box, Container, Link, Typography } from '@mui/material'
 import Controle from "./img/controlesemfundo.png";
 import Carinha from "./img/carinhafeliz.png";
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 /* "_id": "650adff42a26e4e19b776104",*/
 function Perfil(props) {
     const [ email, setEmail ] = useState("");
