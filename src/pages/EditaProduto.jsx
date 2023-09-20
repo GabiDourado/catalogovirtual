@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField, Typography, Alert } from '@mui/material'
+import { Box, Button, Container, TextField, Typography, Alert, Grid } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,9 +13,10 @@ function EditaProduto(props) {
     const [ imagem, setImagen] = useState("");
     const [ edita, setEdita ] = useState(false);
     const [ erro, setErro ] = useState(false);
+    const usuario = localStorage.getItem("usuario");
 
     useEffect(( ) => {
-        fetch(process.env.REACT_APP_BACKEND + "filmes/" + id,{ 
+        fetch(process.env.REACT_APP_BACKEND + "produtos/" + usuario +"/" + id,{ 
             method:"GET",
             headers:{
                 'Content-Type': 'application/json'
@@ -39,7 +40,7 @@ function EditaProduto(props) {
     }, [] );
     function Editar(e){
         e.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "filmes",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "produtos/",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"PUT",
             headers:{
                 'Content-Type': 'application/json'
@@ -52,7 +53,8 @@ function EditaProduto(props) {
                     ano: ano,
                     duracao: duracao ,
                     categoria: categoria ,
-                    imagem: imagem
+                    imagem: imagem,
+                    usuario: usuario
                 }
             )
         })
@@ -64,7 +66,7 @@ function EditaProduto(props) {
             }
             else{
                 setErro(true); //se tudo estiver correto, ativa o login como verdadeiro e redireciona o usuário para a pagina inicial
-                setEdita("Não foi possível editar o filme");
+                setEdita("Não foi possível editar o jogo");
             }
         })
         .catch( (erro) => {setErro("Erro ao processar sua requisição")})
@@ -84,7 +86,7 @@ function EditaProduto(props) {
                 component="h1" 
                 variant="h4">Edite seu Jogo:</Typography>
                 {erro && (<Alert severity="warning" variant="outlined">{erro}</Alert>)}
-                {edita && (<Alert severity="success" variant="outlined">Filme editado com sucesso!</Alert>)}
+                {edita && (<Alert severity="success" variant="outlined">Jogo editado com sucesso!</Alert>)}
             <Box component="form" onSubmit={Editar}>
             <TextField
                     type="text" 
@@ -152,6 +154,16 @@ function EditaProduto(props) {
                     type='submit'
                     variant="contained"  
                     fullWidth sx={{mt:1, mb:1}}>Editar</Button>
+                     <Grid xs={5} sx={{
+                        textAlign:"center",
+                        mt: 1,
+                        mb: 0,
+                    }}>
+                        <Button variant="outlined" href="/" sx={{
+                            textDecoration:"none",
+                            color:"black",
+                        }}> Voltar</Button>
+                  </Grid>
             </Box>
         </Box>
     </Container>

@@ -2,16 +2,26 @@ import React from 'react'
 import MenuTeste from './components/MenuTeste'
 import { Avatar, Box, Container, Link, Typography } from '@mui/material'
 import Controle from "./img/controlesemfundo.png";
-import Carinha from "./img/carinhafeliz.png"
-
+import Carinha from "./img/carinhafeliz.png";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+/* "_id": "650adff42a26e4e19b776104",*/
 function Perfil(props) {
+    const { id } = useParams();
+    const [ email, setEmail ] = useState("");
+    const [ senha, setSenha ] = useState("");
+    const [ telefone, setTel ] = useState("");
+    const [ nome, setNome ] = useState("");
+    const [ cpf, setCpf ] = useState("");
+    const [ edita, setEdita ] = useState(false);
+    const [ erro, setErro ] = useState(false);
   return (
     <>
       <MenuTeste/>
         <Container component="div" maxWidth="lg" sx={{backgroundColor:"#EFCDFF", borderRadius:"30px", mt:"2rem", mb:"2rem", padding:"1rem"}}>
           <Box sx={{display: "flex"}}>
               <Box sx={{ width:"25%"}}>
-                <img style={{
+                <img alt="carinha" style={{
                   width:"100%",
                 }} src={Carinha}></img>
               </Box>
@@ -28,9 +38,9 @@ function Perfil(props) {
                     backgroundColor: "#A011E4"
                   }}
                 ></Avatar>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{props.nome}</Typography>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{props.email}</Typography>
-                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>{props.telefone}</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Nome</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Email</Typography>
+                <Typography variant="span"  sx={{padding:"0.3rem", fontSize:"2rem"}}>Telefone</Typography>
               </Box>
           </Box>
           <Box sx={{display:"flex"}}>
@@ -42,7 +52,7 @@ function Perfil(props) {
               width:"20%",
               marginTop:"-3rem"
             }}>
-              <img style={{
+              <img alt='controle' style={{
                 width:"100%"
               }} src={Controle}></img>
             </Box>

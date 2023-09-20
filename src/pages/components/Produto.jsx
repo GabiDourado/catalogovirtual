@@ -1,9 +1,11 @@
 import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Produto(props) {
   return (
-    <Card sx={{maxWidth: 345}}>
+    <Card sx={{maxWidth: 340, maxHeight: 450}}>
         <CardActionArea>
             <CardMedia
                 component="img"
@@ -32,7 +34,7 @@ function Produto(props) {
                             {props.ano}
                         </Typography>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={4}>
                         <Typography 
                         variant="span" 
                         component="span">
@@ -46,12 +48,12 @@ function Produto(props) {
                         {props.descricao}
                 </Typography>
             </CardContent>
-            <Grid container>
-                <Grid item xs={6}>
-                    <Button variant="outlined" onClick={props.excluir}>X</Button>
+            <Grid container sx={{ display:"flex", flexFlow:"row", alignItems:"center"}}>
+                <Grid item xs={10}>
+                    <Button onClick={props.excluir} ><DeleteForeverIcon sx={{color:"purple"}}/></Button>
                 </Grid>
-                <Grid item xs={6}>
-                    <Link href={ "edicao/" + props.id} sx={{display:"flex", flexFlow: "row", alignItems:"center"}}>Editar</Link>
+                <Grid item xs>
+                    <Link href={ "edicao/" + props.id}><EditIcon  sx={{color:"purple"}}/></Link>
                 </Grid>
             </Grid>
             

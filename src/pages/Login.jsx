@@ -15,7 +15,6 @@ function Login() {
     // O useeffect foi usado para determinar a ação que ocorrerá caso o usuario esteja logado, com todas as informações corretamente colocadas
     useEffect( () => {
         if(login){
-            localStorage.setItem( "usuario", JSON.stringify( {email:email})); //salva o usuário no localstorage 
             setEmail(""); //zera o campo do email
             setSenha(""); //zera o campo da senha 
             navigate("/"); //direciona o usuário para a página inicial
@@ -38,9 +37,11 @@ function Login() {
         .then( (resposta) => resposta.json()) //se a autenticação funcionar, transforma a resposta em json
         .then( (json) => {
             if(json.user){ //se a resposta for transformada em json, vem a esse passo
+              localStorage.setItem( "usuario" , JSON.stringify(json.user._id));
               setLogin(true); //se tudo estiver correto, ativa o login como verdadeiro e redireciona o usuário para a pagina inicial  
             }
             else{
+              localStorage.removeItem( "usuario" );
               setErro(true); //se a resposta for 401, que representa um erro, a variável do erro se torna verdadeira e aciona os acontecimentos que indicam ao usuário qua algo está errado
             }
         })

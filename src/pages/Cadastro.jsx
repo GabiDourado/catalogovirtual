@@ -14,7 +14,7 @@ function Cadastro() {
 
     function Cadastrar( e ){
         e.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "users",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "usuarios",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'
@@ -132,14 +132,11 @@ function Cadastro() {
                         mt: 1,
                         mb: 0,
                     }}>
-                        <Link  sx={{
-                        
-                        fontSize: "1.3rem",
-                        }}><Button variant="outlined" href="/login" sx={{
+                        <Button variant="outlined" href="/login" sx={{
                             textDecoration:"none",
                             color:"black",
-                        }}> Voltar</Button></Link>
-                  </Grid>
+                        }}> Voltar</Button>
+                </Grid>
             </Box>
         </Box>
     </Container>

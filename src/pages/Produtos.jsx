@@ -13,13 +13,14 @@ function Produtos() {
     const [ erro, setErro ] = useState(false);
     function Enviar(e){
         e.preventDefault();
-        fetch(process.env.REACT_APP_BACKEND + "produto",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
+        fetch(process.env.REACT_APP_BACKEND + "produtos",{ //o fetch é o que dá as condições da verificação, direciona o servidor e o que deve ser verificado
             method:"POST",
             headers:{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
                 {
+                    usuario: localStorage.getItem("usuario"),
                     titulo: titulo,
                     descricao: descricao,
                     ano: ano,
@@ -68,8 +69,8 @@ function Produtos() {
                 <Typography 
                     component="h1" 
                     variant="h4">Novo Jogo:</Typography>
-                    {erro && (<Alert severity="warning" variant="outlined">Algo deu errado, ou o filme já está cadastrado, por favor, tente novamente</Alert>)}
-                    {adiciona && (<Alert severity="success" variant="outlined">Filme registrado com sucesso!</Alert>)}
+                    {erro && (<Alert severity="warning" variant="outlined">Algo deu errado, ou o jogo já está cadastrado, por favor, tente novamente</Alert>)}
+                    {adiciona && (<Alert severity="success" variant="outlined">Jogo registrado com sucesso!</Alert>)}
                 <Box component="form" onSubmit={Enviar}>
                     <TextField
                         type="text" 
@@ -137,7 +138,7 @@ function Produtos() {
                         justifyContent: "center",
                         width: "300px"
                     }}>
-                        <img src={imagem} alt={titulo} style={{ width: "100%" }} />
+                        <img src={imagem} alt="" style={{ width: "100%" }} />
                     </Box>
                     <Button
                         type='submit'

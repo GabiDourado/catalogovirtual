@@ -1,7 +1,6 @@
-import { Box, Button, Container, TextField, Typography, Alert, Grid,  Link } from '@mui/material'
+import { Box, Button, Container, TextField, Typography, Alert, Grid } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 function EditaPerfil( props) {
     const [ email, setEmail ] = useState("");

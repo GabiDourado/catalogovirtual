@@ -1,11 +1,14 @@
-import { AppBar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Typography, Button, Tooltip, Avatar, Grid, Link } from '@mui/material'
+import { AppBar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Typography, Button, Tooltip, Avatar, Link } from '@mui/material'
 import React from 'react'
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useParams } from 'react-router-dom';
 
 function MenuTeste(props) {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const usuario = localStorage.getItem("usuario");
+    const { id } = useParams();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -22,7 +25,7 @@ function MenuTeste(props) {
         setAnchorElUser(null);
     };
     return (
-        <AppBar position="static" >
+        <AppBar position="static">
             <Container maxWidth="xl"
                 sx={{
                     backgroundColor: "#D781FF"
@@ -116,7 +119,7 @@ function MenuTeste(props) {
                         </Button>
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
+                        <Tooltip title="Abrir Opções">
                             <IconButton onClick={handleOpenUserMenu}
                                 sx={{
                                     p: 0
@@ -150,16 +153,19 @@ function MenuTeste(props) {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Link sx={{ textDecoration: "none", color: "white" }} href="/perfil/:id">Perfil</Link>
+                                <Button sx={{ textDecoration: "none", color: "white", width:"100%" }} href={"/perfil/" + usuario}>Perfil</Button>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Link sx={{ textDecoration: "none", color: "white" }} href="/login">Entrar</Link>
+                                <Button sx={{ textDecoration: "none", color: "white" , width:"100%"}} href="/login">Entrar</Button>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Link sx={{ textDecoration: "none", color: "white" }} href="/cadastro">Cadastrar</Link>
+                                <Button sx={{ textDecoration: "none", color: "white" , width:"100%"}} href="/cadastro">Cadastrar</Button>
                             </MenuItem>
                             <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">Sair da Conta</Typography>
+                                <Button onClick={()=> {
+                                    localStorage.removeItem("usuario");
+                                    alert("Você saiu da sua conta")}} 
+                                sx={{ textDecoration: "none", color: "white", width:"100%" }}>Sair da Conta</Button>
                             </MenuItem>
                         </Menu>
                     </Box>
